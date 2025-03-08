@@ -9,6 +9,7 @@ import Foundation
 
 struct Upgrade: Identifiable {
     var id = UUID()
+    var maxLevel = 1
     var maxAmount: Int
     var currentAmount: Int
     var oneCost: Float

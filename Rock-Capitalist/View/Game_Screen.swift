@@ -77,10 +77,11 @@ struct IncomeView: View {
     
     var body: some View {
         ZStack {
-            Image("IncomeBar")
             if rock.upgrade.currentAmount != 0 {
                 ProgressbarView(rock: rock, gameplayVM: gameplayVM)
                 Text("\(rock.value.description)")
+            } else {
+                Image("IncomeBar")
             }
         }
         .onTapGesture {
@@ -163,10 +164,7 @@ struct ProgressbarView: View {
     
     var body: some View {
         ZStack {
-//            Text("\(Int(percent))%")
-//                .padding(.trailing, 70)
-//
-//            Progressbar(width: 200, height: 30, percent: percent, color1: Color.blue, color2: Color.cyan)
+            Progressbar(width: 230, height: 30, percent: CGFloat(gameplayVM.counterDict[rock.name] ?? 0.0) / 3 * 100, color1: Color.blue, color2: Color.cyan)
         }
     }
 }
@@ -177,26 +175,23 @@ struct TimerView: View {
     let rock: Rock
     @ObservedObject var gameplayVM: Gameplay_VM
     
-    @StateObject private var timerManager = TimerManager()
-    
     @State var hasWorker = false
 
     var body: some View {
         VStack {
-            if hasWorker {
-                Text("\(String(format: "%.2f", timerManager.counter))") // Display with 2 decimal places
+            if gameplayVM.counterDict[rock.name] != nil { // Check if rock has a worker (is in the counterDict)
+                Text("\(String(format: "%.2f", gameplayVM.counterDict[rock.name] ?? 0.0))S") // Display with 2 decimal places
             } else {
                 Button("$\(Int(rock.worker.cost))") {
                     if gameplayVM.checkIfHasWorker(rock: rock) {
-                        hasWorker = true
-                        timerManager.startTimer()
+                        gameplayVM.startTimer(for: rock)
                     }
                 }
                 .foregroundStyle(.black)
             }
         }
         .onDisappear {
-            timerManager.stopTimer() // Stop timer when the view disappears
+            gameplayVM.stopTimer(for: rock) // Stop timer when the view disappears
         }
     }
 }
