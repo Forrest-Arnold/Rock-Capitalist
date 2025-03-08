@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Worker: Identifiable {
+    var id = UUID()
+    let cost: Float
+    var isBought = false
+}

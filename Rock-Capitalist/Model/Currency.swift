@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct Currency: Identifiable {
+    var id = UUID()
+    var cash: Float = 0
+    var bucks: Float = 0
+}

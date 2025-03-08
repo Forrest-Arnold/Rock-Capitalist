@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct Upgrade {
+struct Upgrade: Identifiable {
+    var id = UUID()
     var maxAmount: Int
     var currentAmount: Int
-    var oneCost: Int
-    var tenCost: Int
-    var fiftyCost: Int
-    var hundredCost: Int
-    var maxCost: Int
+    var oneCost: Float
+    var tenCost: Float
+    var fiftyCost: Float
+    var hundredCost: Float
+    var maxCost: Float
 }

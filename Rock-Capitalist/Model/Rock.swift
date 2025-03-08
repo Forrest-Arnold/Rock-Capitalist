@@ -10,8 +10,9 @@ import Foundation
 struct Rock: Identifiable {
     var id = UUID()
     let name: String
-    var value: Int
-    var productionSpeed: Int
-    let upgrade: Upgrade
-    let buyCost: Int
+    var value: Float
+    var productionSpeed: Float
+    var upgrade: Upgrade
+    let buyCost: Float
+    var worker: Worker
 }
