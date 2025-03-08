@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct Game_Screen: View {
+    
+    @StateObject private var gameplayVM = Gameplay_VM()
+    
     var body: some View {
-        ScrollView {
-            VStack {
-                Image("Coal")
-                Image("Copper")
-                
+        VStack {
+            ForEach(gameplayVM.playerRocks) { rock in
+                ZStack {
+                    Image("IconBackground")
+                    Image(rock.name)
+                    HStack {
+                        Text("\(rock.upgrade.currentAmount.description)  /")
+                        Text(rock.upgrade.maxAmount.description)
+                    }
+                    .foregroundStyle(Color.white)
+                    .bold()
+                    .padding(.top, 63)
+                }
             }
         }
     }
