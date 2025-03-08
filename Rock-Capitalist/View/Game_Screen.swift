@@ -180,7 +180,7 @@ struct TimerView: View {
     var body: some View {
         VStack {
             if gameplayVM.counterDict[rock.name] != nil { // Check if rock has a worker (is in the counterDict)
-                Text("\(String(format: "%.2f", gameplayVM.counterDict[rock.name] ?? 0.0))S") // Display with 2 decimal places
+                Text("\(String(format: "%.2f", gameplayVM.counterDict[rock.name] ?? 0.0))") // Display with 2 decimal places
             } else {
                 Button("$\(Int(rock.worker.cost))") {
                     if gameplayVM.checkIfHasWorker(rock: rock) {
